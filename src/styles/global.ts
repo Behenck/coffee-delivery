@@ -13,8 +13,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${(props) => props.theme['gray-900']};
-    color: ${(props) => props.theme['gray-300']};
+    background: ${(props) => props.theme['gray-100']};
+    color: ${(props) => props.theme['gray-800']};
     --webkit-font-smoothing: antialiased;
   }
 
@@ -22,5 +22,10 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 1rem;
+  }
+
+  button {
+    cursor: pointer;
+    border-radius: 8px;
   }
 `

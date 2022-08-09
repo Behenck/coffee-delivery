@@ -17,11 +17,11 @@ export const defaultTheme = {
 
   'yellow-100': '#F1E9C9',
   'yellow-500': '#DBAC2C',
-  'yellow-600': '#C47F17',
+  'yellow-700': '#C47F17',
 
   'fuschia-100': '#FCDDEC',
   'fuschia-500': '#F178B6',
-  'fuschia-600': '#EF5DA8',
+  'fuschia-700': '#EF5DA8',
 
   'iris-100': '#A5A6F6',
   'iris-500': '#7879F1',
