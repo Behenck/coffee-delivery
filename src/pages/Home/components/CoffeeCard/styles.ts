@@ -52,4 +52,12 @@ export const Tags = styled.div`
   }
 `
 
-export const Buy = styled.div``
+export const Buy = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+export const Actions = styled.div``
+export const Counter = styled.div``

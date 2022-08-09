@@ -1,7 +1,7 @@
 import { ShoppingCart } from 'phosphor-react'
 
 import ExpressoTradicional from '../../../../assets/Expresso-Tradicional.png'
-import { CoffeeCardContainer, Tags } from './styles'
+import { Actions, Buy, CoffeeCardContainer, Counter, Tags } from './styles'
 
 export function CoffeeCard() {
   return (
@@ -14,19 +14,21 @@ export function CoffeeCard() {
       <p>O tradicional café feito com água quente e grãos moídos</p>
 
       <Buy>
-        <p>
-          R$ <span>9,90</span>
-        </p>
-
         <div>
-          <button>-</button>
-          <span>1</span>
-          <button>+</button>
+          R$ <span>9,90</span>
         </div>
 
-        <button>
-          <ShoppingCart size={24} weight="fill" />
-        </button>
+        <Actions>
+          <Counter>
+            <button>-</button>
+            <span>1</span>
+            <button>+</button>
+          </Counter>
+
+          <button>
+            <ShoppingCart size={24} weight="fill" />
+          </button>
+        </Actions>
       </Buy>
     </CoffeeCardContainer>
   )
