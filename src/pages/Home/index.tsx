@@ -4,6 +4,7 @@ import {
   CoffeesContent,
   DescriptionBox,
   DescriptionDelivery,
+  Content,
 } from './styles'
 
 import CoffeImage from '../../assets/Coffee.png'
@@ -57,7 +58,22 @@ export function Home() {
       <CoffeesContent>
         <h2>Nossos cafés</h2>
 
-        <CoffeeCard />
+        <Content>
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+          <CoffeeCard />
+        </Content>
       </CoffeesContent>
     </>
   )

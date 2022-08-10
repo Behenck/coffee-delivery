@@ -1,7 +1,14 @@
-import { ShoppingCart } from 'phosphor-react'
+import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 
 import ExpressoTradicional from '../../../../assets/Expresso-Tradicional.png'
-import { Actions, Buy, CoffeeCardContainer, Counter, Tags } from './styles'
+import {
+  Actions,
+  Buy,
+  CoffeeCardContainer,
+  Counter,
+  ShoppingCartButton,
+  Tags,
+} from './styles'
 
 export function CoffeeCard() {
   return (
@@ -20,14 +27,18 @@ export function CoffeeCard() {
 
         <Actions>
           <Counter>
-            <button>-</button>
-            <span>1</span>
-            <button>+</button>
+            <button>
+              <Minus size={14} weight="bold" />
+            </button>
+            1
+            <button>
+              <Plus size={14} weight="bold" />
+            </button>
           </Counter>
 
-          <button>
+          <ShoppingCartButton>
             <ShoppingCart size={24} weight="fill" />
-          </button>
+          </ShoppingCartButton>
         </Actions>
       </Buy>
     </CoffeeCardContainer>

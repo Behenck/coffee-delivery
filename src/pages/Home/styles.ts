@@ -74,4 +74,13 @@ export const DescriptionBox = styled.div<BoxProps>`
   }
 `
 
-export const CoffeesContent = styled.div``
+export const CoffeesContent = styled.div`
+  padding: 1rem 0;
+  padding-bottom: 10rem;
+`
+
+export const Content = styled.div`
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+`

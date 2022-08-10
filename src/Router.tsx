@@ -1,13 +1,14 @@
 import { Route, Routes } from 'react-router-dom'
 import { DefaultLayout } from './layouts/DefaultLayout'
 import { Home } from './pages/Home'
+import { Payment } from './pages/Payment'
 
 export function Router() {
   return (
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/history" element={<h1>teste</h1>} />
+        <Route path="/payment" element={<Payment />} />
       </Route>
     </Routes>
   )
