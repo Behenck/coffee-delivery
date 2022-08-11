@@ -48,11 +48,24 @@ export const ShoppingCartButton = styled.button`
   color: ${(props) => props.theme['yellow-100']};
   transition: filter 0.2s;
 
-  &:hover {
-    filter: brightness(0.95);
-  }
-
   svg {
     color: ${(props) => props.theme['yellow-700']};
+  }
+
+  &::after {
+    content: '3';
+    background-color: ${(props) => props.theme['yellow-700']};
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 50%;
+    padding: 0.25rem 0.5rem;
+
+    position: absolute;
+    margin-top: -3rem;
+    margin-left: 3rem;
+  }
+
+  &:hover {
+    filter: brightness(0.95);
   }
 `

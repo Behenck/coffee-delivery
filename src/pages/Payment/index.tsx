@@ -16,14 +16,16 @@ import {
   Cart,
   CartCoffees,
   CompleteOrder,
+  ConfirmDeliveryButton,
   Counter,
   Details,
   FormAddress,
   FormInput,
   Info,
-  ItensCart,
+  ItemsCart,
   PaymentContainer,
   PaymentContent,
+  Price,
   Product,
   Total,
   TrashButton,
@@ -146,21 +148,23 @@ export function Payment() {
             <span>R$ 9,90</span>
           </Product>
 
-          <ItensCart>
-            <div>
-              <p>Total de itens</p>
-              <p>R$ 29,70</p>
-            </div>
-            <div>
-              <p>Entrega</p>
-              <p>R$ 3,50</p>
-            </div>
-            <Total>
-              <p>Total</p>
-              <p>R$ 33,20</p>
-            </Total>
-            <button>CONFIRMAR PEDIDO</button>
-          </ItensCart>
+          <div>
+            <ItemsCart>
+              <Price>
+                <p>Total de itens</p>
+                <p>R$ 29,70</p>
+              </Price>
+              <Price>
+                <p>Entrega</p>
+                <p>R$ 3,50</p>
+              </Price>
+              <Total>
+                <p>Total</p>
+                <p>R$ 33,20</p>
+              </Total>
+            </ItemsCart>
+            <ConfirmDeliveryButton>CONFIRMAR PEDIDO</ConfirmDeliveryButton>
+          </div>
         </Cart>
       </CartCoffees>
     </PaymentContainer>

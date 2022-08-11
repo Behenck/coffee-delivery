@@ -239,7 +239,6 @@ export const Counter = styled.div`
     }
   }
 `
-export const ItensCart = styled.div``
 export const TrashButton = styled.button`
   display: flex;
   justify-content: center;
@@ -255,4 +254,50 @@ export const TrashButton = styled.button`
     color: ${(props) => props.theme['purple-500']};
   }
 `
-export const Total = styled.div``
+
+export const ItemsCart = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const Price = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    display: block;
+    font-size: 0.875rem;
+    color: ${(props) => props.theme['gray-700']};
+  }
+`
+
+export const Total = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: ${(props) => props.theme['gray-800']};
+  }
+`
+
+export const ConfirmDeliveryButton = styled.button`
+  margin-top: 2rem;
+  border: 0;
+  background-color: ${(props) => props.theme['yellow-500']};
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: ${(props) => props.theme.white};
+
+  width: 100%;
+  padding: 0.75rem;
+
+  transition: background-color 0.2s;
+
+  :hover {
+    background-color: ${(props) => props.theme['yellow-700']};
+  }
+`
