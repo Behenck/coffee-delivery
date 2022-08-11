@@ -50,6 +50,7 @@ export const Tags = styled.div`
     background-color: ${(props) => props.theme['yellow-100']};
     border-radius: 100px;
     padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
   }
 `
 

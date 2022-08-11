@@ -7,10 +7,53 @@ import {
   Content,
 } from './styles'
 
+import { useEffect, useState } from 'react'
+
 import CoffeImage from '../../assets/Coffee.png'
 import { CoffeeCard } from './components/CoffeeCard'
+import { api } from '../../utils/api'
+
+interface Coffees {
+  id: string
+  name: string
+  image: string
+  tags: {
+    name: string
+  }[]
+  description: string
+  price: number
+}
+
+interface Cart {
+  id: string
+  quantity: number
+}
 
 export function Home() {
+  const [coffees, setCoffees] = useState<Coffees[]>([])
+  const [cart, setCart] = useState<Cart[]>([])
+
+  useEffect(() => {
+    const listCoffees = async () => {
+      const response = await api.get<Coffees[]>('/listCoffees.json')
+      setCoffees(response.data)
+      console.log(response.data)
+    }
+    listCoffees()
+  }, [])
+
+  function addToCart(id: string, quantity: number) {
+    setCart((state) => [
+      ...state,
+      {
+        id,
+        quantity,
+      },
+    ])
+  }
+
+  console.log(cart)
+
   return (
     <>
       <Container>
@@ -59,20 +102,20 @@ export function Home() {
         <h2>Nossos cafés</h2>
 
         <Content>
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
+          {coffees.map((coffee) => {
+            return (
+              <CoffeeCard
+                key={coffee.id}
+                id={coffee.id}
+                name={coffee.name}
+                image={coffee.image}
+                description={coffee.description}
+                price={coffee.price}
+                tags={coffee.tags}
+                addToCart={addToCart}
+              />
+            )
+          })}
         </Content>
       </CoffeesContent>
     </>

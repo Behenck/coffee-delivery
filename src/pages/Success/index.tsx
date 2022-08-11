@@ -1,6 +1,6 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import IllustrationImage from '../../assets/Illustration.svg'
-import { Container, OrderInfo } from './styles'
+import { Container, Content, OderInfoBox, OrderInfo } from './styles'
 
 export function Success() {
   return (
@@ -8,11 +8,11 @@ export function Success() {
       <h1>Uhu! Pedido confirmado</h1>
       <p>Agora é só aguardar que logo o café chegará até você</p>
 
-      <div>
+      <Content>
         <OrderInfo>
-          <div>
+          <OderInfoBox boxColor="purple">
             <span>
-              <MapPin weight="fill" />
+              <MapPin weight="fill" size={16} />
             </span>
             <div>
               <p>
@@ -20,29 +20,32 @@ export function Success() {
               </p>
               <p>Farrapos - Porto Alegre, RS</p>
             </div>
-          </div>
-          <div>
+          </OderInfoBox>
+          <OderInfoBox boxColor="yellow">
             <span>
-              <Timer weight="fill" />
+              <Timer weight="fill" size={16} />
             </span>
             <div>
               <p>Previsão de entrega</p>
               <strong>20 min - 30 min</strong>
             </div>
-          </div>
-          <div>
+          </OderInfoBox>
+          <OderInfoBox boxColor="yellowBlack">
             <span>
-              <CurrencyDollar weight="fill" />
+              <CurrencyDollar weight="fill" size={16} />
             </span>
             <div>
               <p>Pagamento na entrega</p>
               <strong>Cartão de Crédito</strong>
             </div>
-          </div>
+          </OderInfoBox>
         </OrderInfo>
 
-        <img src="" alt="" />
-      </div>
+        <img
+          src={IllustrationImage}
+          alt="Imagem de illustração de um homem em cima de uma moto indo embora"
+        />
+      </Content>
     </Container>
   )
 }

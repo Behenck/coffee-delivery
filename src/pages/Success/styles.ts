@@ -18,7 +18,20 @@ export const Container = styled.div`
   }
 `
 
+export const Content = styled.div`
+  display: flex;
+  gap: 6.375rem;
+  align-items: flex-end;
+`
+
 export const OrderInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  width: 100%;
+  max-width: 526px;
+  padding: 2.5rem;
   border-width: 1px;
   border-style: solid;
   border-image: linear-gradient(
@@ -33,4 +46,32 @@ export const OrderInfo = styled.div`
       border-box;
   border-radius: 6px 36px;
   border: 1px solid transparent;
+`
+
+const BOX_COLORS = {
+  yellowBlack: 'yellow-700',
+  yellow: 'yellow-500',
+  purple: 'purple-500',
+} as const
+
+interface BoxProps {
+  boxColor: keyof typeof BOX_COLORS
+}
+
+export const OderInfoBox = styled.div<BoxProps>`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  line-height: 1.2;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: ${(props) => props.theme[BOX_COLORS[props.boxColor]]};
+    color: ${(props) => props.theme.white};
+  }
 `

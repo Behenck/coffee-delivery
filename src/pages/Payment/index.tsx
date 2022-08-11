@@ -31,8 +31,6 @@ import {
   TrashButton,
 } from './styles'
 
-import CoffeImage from '../../assets/Expresso-Tradicional.png'
-
 export function Payment() {
   return (
     <PaymentContainer>
@@ -100,7 +98,7 @@ export function Payment() {
         <Cart>
           <Product>
             <Info>
-              <img src={CoffeImage} alt="" />
+              <img src="image/ExpressoTradicional.png" alt="" />
               <Details>
                 <p>Expresso Tradicional</p>
                 <Actions>
@@ -125,7 +123,7 @@ export function Payment() {
 
           <Product>
             <Info>
-              <img src={CoffeImage} alt="" />
+              <img src="image/ExpressoTradicional.png" alt="" />
               <Details>
                 <p>Expresso Tradicional</p>
                 <Actions>

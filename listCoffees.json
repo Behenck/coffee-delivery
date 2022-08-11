@@ -1,0 +1,200 @@
+[
+  {
+    "id": "4ca6229f-81ae-4c0d-bd2b-8dfc4851398a",
+    "name": "Expresso Tradicional",
+    "image": "image/ExpressoTradicional.png",
+    "tags": [
+      {
+        "name": "Tradicional"
+      }
+    ],
+    "description": "O tradicional café feito com água quente e grãos moídos",
+    "price": 9.90
+  },
+  {
+    "id": "26034efa-7a34-4025-a825-270f488722a5",
+    "name": "Expresso Americano",
+    "image": "image/ExpressoAmericano.png",
+    "tags": [
+      {
+        "name": "Tradicional"
+      }
+    ],
+    "description": "Expresso diluído, menos intenso que o tradicional",
+    "price": 9.90
+  },
+  {
+    "id": "e0ec18d8-733e-4247-bd09-3da8578c79ce",
+    "name": "Expresso Cremoso",
+    "image": "image/ExpressoCremoso.png",
+    "tags": [
+      {
+        "name": "Tradicional"
+      }
+    ],
+    "description": "Café expresso tradicional com espuma cremosa",
+    "price": 9.90
+  },
+  {
+    "id": "c58eb700-430f-41da-ad53-dcb4df2b8414",
+    "name": "Expresso Gelado",
+    "image": "image/ExpressoGelado.png",
+    "tags": [
+      {
+        "name": "Tradicional"
+      },
+      {
+        "name": "Gelado"
+      }
+    ],
+    "description": "Bebida preparada com café expresso e cubos de gelo",
+    "price": 9.90
+  },
+  {
+    "id": "f4fa6235-ce05-43dd-ba2a-d0ee934e6ee3",
+    "name": "Café com Leite",
+    "image": "image/CafeComLeite.png",
+    "tags": [
+      {
+        "name": "Tradicional"
+      },
+      {
+        "name": "Com leite"
+      }
+    ],
+    "description": "Meio a meio de expresso tradicional com leite vaporizado",
+    "price": 9.90
+  },
+  {
+    "id": "50379071-0dc1-46e1-86f8-b0bb4ae41295",
+    "name": "Latte",
+    "image": "image/Latte.png",
+    "tags": [
+      {
+        "name": "Tradicional"
+      },
+      {
+        "name": "Com leite"
+      }
+    ],
+    "description": "Uma dose de café expresso com o dobro de leite e espuma cremosa",
+    "price": 9.90
+  },
+  {
+    "id": "6c7aa915-bacf-4002-b947-3db340938489",
+    "name": "Capuccino",
+    "image": "image/Capuccino.png",
+    "tags": [
+      {
+        "name": "Tradicional"
+      },
+      {
+        "name": "Com leite"
+      }
+    ],
+    "description": "Bebida com canela feita de doses iguais de café, leite e espuma",
+    "price": 9.90
+  },
+  {
+    "id": "dbe86fdc-4a04-4721-9f17-abebb581ea0b",
+    "name": "Macchiato",
+    "image": "image/Macchiato.png",
+    "tags": [
+      {
+        "name": "Tradicional"
+      },
+      {
+        "name": "Com leite"
+      }
+    ],
+    "description": "Café expresso misturado com um pouco de leite quente e espuma",
+    "price": 9.90
+  },
+  {
+    "id": "2ee5c045-fc91-4eda-aec5-7d74c9800590",
+    "name": "Mocaccino",
+    "image": "image/Mocaccino.png",
+    "tags": [
+      {
+        "name": "Tradicional"
+      },
+      {
+        "name": "Com leite"
+      }
+    ],
+    "description": "Café expresso com calda de chocolate, pouco leite e espuma",
+    "price": 9.90
+  },
+  {
+    "id": "d156a3d0-9ab0-4f0a-9c35-cb9970c55195",
+    "name": "Chocolate Quente",
+    "image": "image/ChocolateQuente.png",
+    "tags": [
+      {
+        "name": "Tradicional"
+      },
+      {
+        "name": "Com leite"
+      }
+    ],
+    "description": "Bebida feita com chocolate dissolvido no leite quente e café",
+    "price": 9.90
+  },
+  {
+    "id": "5b63853a-fbf6-423d-bdd3-8ec229b6c402",
+    "name": "Cubano",
+    "image": "image/Cubano.png",
+    "tags": [
+      {
+        "name": "Especial"
+      },
+      {
+        "name": "Alcoólico"
+      },
+      {
+        "name": "Gelado"
+      }
+    ],
+    "description": "Drink gelado de café expresso com rum, creme de leite e hortelã",
+    "price": 9.90
+  },
+  {
+    "id": "10aed719-01d6-437f-ab9a-9b0dc5489bc8",
+    "name": "Havaiano",
+    "image": "image/Havaiano.png",
+    "tags": [
+      {
+        "name": "Especial"
+      }
+    ],
+    "description": "Bebida adocicada preparada com café e leite de coco",
+    "price": 9.90
+  },
+  {
+    "id": "746f10ec-86e6-43cb-bb16-cfa77ae8a913",
+    "name": "Árabe",
+    "image": "image/Arabe.png",
+    "tags": [
+      {
+        "name": "Especial"
+      }
+    ],
+    "description": "Bebida preparada com grãos de café árabe e especiarias",
+    "price": 9.90
+  },
+  {
+    "id": "7ba81144-ba90-4d57-a423-d409b6b36612",
+    "name": "Irlandês",
+    "image": "image/Irlandes.png",
+    "tags": [
+      {
+        "name": "Especial"
+      },
+      {
+        "name": "Alcoólico"
+      }
+    ],
+    "description": "Bebida a base de café, uísque irlandês, açúcar e chantilly",
+    "price": 9.90
+  }
+]

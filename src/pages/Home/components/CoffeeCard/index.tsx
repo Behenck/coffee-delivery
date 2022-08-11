@@ -1,6 +1,6 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { useState } from 'react'
 
-import ExpressoTradicional from '../../../../assets/Expresso-Tradicional.png'
 import {
   Actions,
   Buy,
@@ -10,33 +10,69 @@ import {
   Tags,
 } from './styles'
 
-export function CoffeeCard() {
+interface CoffeeCardProps {
+  id: string
+  name: string
+  image: string
+  tags: {
+    name: string
+  }[]
+  description: string
+  price: number
+  addToCart: (id: string, quantity: number) => void
+}
+
+export function CoffeeCard({
+  id,
+  name,
+  image,
+  tags,
+  description,
+  price,
+  addToCart,
+}: CoffeeCardProps) {
+  const [quantity, setQuantity] = useState(1)
+
+  function handleAddToCart() {
+    addToCart(id, quantity)
+  }
+
+  function handleRemoveQuantity() {
+    setQuantity((state) => state - 1)
+  }
+
+  function handleAddQuantity() {
+    setQuantity((state) => state + 1)
+  }
+
   return (
     <CoffeeCardContainer>
-      <img src={ExpressoTradicional} alt="Café Tradicional" />
+      <img src={image} alt={image} />
       <Tags>
-        <span>TRADICIONAL</span>
+        {tags.map((tag) => {
+          return <span key={tag.name}>{tag.name}</span>
+        })}
       </Tags>
-      <h1>Expresso Tradicional</h1>
-      <p>O tradicional café feito com água quente e grãos moídos</p>
+      <h1>{name}</h1>
+      <p>{description}</p>
 
       <Buy>
         <div>
-          R$ <span>9,90</span>
+          R$ <span>{price}0</span>
         </div>
 
         <Actions>
           <Counter>
-            <button>
+            <button onClick={handleRemoveQuantity}>
               <Minus size={14} weight="bold" />
             </button>
-            1
-            <button>
+            {quantity}
+            <button onClick={handleAddQuantity}>
               <Plus size={14} weight="bold" />
             </button>
           </Counter>
 
-          <ShoppingCartButton>
+          <ShoppingCartButton onClick={handleAddToCart}>
             <ShoppingCart size={24} weight="fill" />
           </ShoppingCartButton>
         </Actions>
