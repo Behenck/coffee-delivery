@@ -1,4 +1,9 @@
-import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+import {
+  Coffee as CoffeeIcon,
+  Package,
+  ShoppingCart,
+  Timer,
+} from 'phosphor-react'
 import {
   Container,
   CoffeesContent,
@@ -7,52 +12,14 @@ import {
   Content,
 } from './styles'
 
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import CoffeImage from '../../assets/Coffee.png'
 import { CoffeeCard } from './components/CoffeeCard'
-import { api } from '../../utils/api'
-
-interface Coffees {
-  id: string
-  name: string
-  image: string
-  tags: {
-    name: string
-  }[]
-  description: string
-  price: number
-}
-
-interface Cart {
-  id: string
-  quantity: number
-}
+import { CartContext } from '../../contexts/CartContext'
 
 export function Home() {
-  const [coffees, setCoffees] = useState<Coffees[]>([])
-  const [cart, setCart] = useState<Cart[]>([])
-
-  useEffect(() => {
-    const listCoffees = async () => {
-      const response = await api.get<Coffees[]>('/listCoffees.json')
-      setCoffees(response.data)
-      console.log(response.data)
-    }
-    listCoffees()
-  }, [])
-
-  function addToCart(id: string, quantity: number) {
-    setCart((state) => [
-      ...state,
-      {
-        id,
-        quantity,
-      },
-    ])
-  }
-
-  console.log(cart)
+  const { coffees } = useContext(CartContext)
 
   return (
     <>
@@ -88,7 +55,7 @@ export function Home() {
               </DescriptionBox>
               <DescriptionBox boxColor="pink">
                 <span>
-                  <Coffee size={16} weight="fill" />
+                  <CoffeeIcon size={16} weight="fill" />
                 </span>
                 O café chega fresquinho até você
               </DescriptionBox>
@@ -112,7 +79,6 @@ export function Home() {
                 description={coffee.description}
                 price={coffee.price}
                 tags={coffee.tags}
-                addToCart={addToCart}
               />
             )
           })}

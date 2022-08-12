@@ -8,6 +8,8 @@ import {
   Plus,
   Trash,
 } from 'phosphor-react'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
 import {
   Actions,
   Address,
@@ -32,6 +34,8 @@ import {
 } from './styles'
 
 export function Payment() {
+  const { coffees, cart, totalItems } = useContext(CartContext)
+
   return (
     <PaymentContainer>
       <CompleteOrder>
@@ -96,61 +100,46 @@ export function Payment() {
       <CartCoffees>
         <h1>Cafés selecionados</h1>
         <Cart>
-          <Product>
-            <Info>
-              <img src="image/ExpressoTradicional.png" alt="" />
-              <Details>
-                <p>Expresso Tradicional</p>
-                <Actions>
-                  <Counter>
-                    <button>
-                      <Minus size={14} weight="bold" />
-                    </button>
-                    <span>1</span>
-                    <button>
-                      <Plus size={16} weight="bold" />
-                    </button>
-                  </Counter>
-                  <TrashButton>
-                    <Trash size={16} weight="bold" />
-                    REMOVER
-                  </TrashButton>
-                </Actions>
-              </Details>
-            </Info>
-            <span>R$ 9,90</span>
-          </Product>
+          {coffees.map((coffee) => {
+            const cartItem = cart.find((cartItem) => cartItem.id === coffee.id)
 
-          <Product>
-            <Info>
-              <img src="image/ExpressoTradicional.png" alt="" />
-              <Details>
-                <p>Expresso Tradicional</p>
-                <Actions>
-                  <Counter>
-                    <button>
-                      <Minus size={14} weight="bold" />
-                    </button>
-                    <span>1</span>
-                    <button>
-                      <Plus size={16} weight="bold" />
-                    </button>
-                  </Counter>
-                  <TrashButton>
-                    <Trash size={16} weight="bold" />
-                    REMOVER
-                  </TrashButton>
-                </Actions>
-              </Details>
-            </Info>
-            <span>R$ 9,90</span>
-          </Product>
+            if (cartItem) {
+              return (
+                <Product key={coffee.id}>
+                  <Info>
+                    <img src={coffee.image} alt="" />
+                    <Details>
+                      <p>{coffee.name}</p>
+                      <Actions>
+                        <Counter>
+                          <button>
+                            <Minus size={14} weight="bold" />
+                          </button>
+                          <span>{cartItem.quantity}</span>
+                          <button>
+                            <Plus size={16} weight="bold" />
+                          </button>
+                        </Counter>
+                        <TrashButton>
+                          <Trash size={16} weight="bold" />
+                          REMOVER
+                        </TrashButton>
+                      </Actions>
+                    </Details>
+                  </Info>
+                  <span>R$ {coffee.price}0</span>
+                </Product>
+              )
+            } else {
+              return <></>
+            }
+          })}
 
           <div>
             <ItemsCart>
               <Price>
                 <p>Total de itens</p>
-                <p>R$ 29,70</p>
+                <p>R$ {totalItems}</p>
               </Price>
               <Price>
                 <p>Entrega</p>

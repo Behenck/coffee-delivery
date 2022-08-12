@@ -11,6 +11,10 @@ export const HeaderContainer = styled.header`
   div {
     display: flex;
     gap: 0.875rem;
+
+    a {
+      display: flex;
+    }
   }
 `
 
@@ -36,7 +40,11 @@ export const MapButton = styled.button`
   }
 `
 
-export const ShoppingCartButton = styled.button`
+interface CartProps {
+  quantity: number
+}
+
+export const ShoppingCartButton = styled.button<CartProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,15 +58,17 @@ export const ShoppingCartButton = styled.button`
 
   svg {
     color: ${(props) => props.theme['yellow-700']};
+    width: 100%;
   }
 
   &::after {
-    content: '3';
+    content: '${(props) => props.quantity}';
     background-color: ${(props) => props.theme['yellow-700']};
+    padding: 0.25rem 0.5rem;
     font-size: 0.75rem;
     font-weight: 700;
     border-radius: 50%;
-    padding: 0.25rem 0.5rem;
+    display: ${(props) => props.quantity === 0 && 'none'};
 
     position: absolute;
     margin-top: -3rem;
