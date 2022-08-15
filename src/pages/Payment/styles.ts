@@ -224,14 +224,15 @@ export const Counter = styled.div`
   align-items: center;
   background: ${(props) => props.theme['gray-400']};
   border-radius: 6px;
-  padding: 0.5rem;
   gap: 0.5rem;
+  padding: 0 0.375rem;
 
   button {
     display: flex;
     align-items: center;
     justify-content: space-around;
     border: 0;
+    padding: 0.5rem 0.125rem;
     background-color: transparent;
 
     svg {

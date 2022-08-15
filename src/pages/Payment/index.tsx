@@ -1,3 +1,4 @@
+import produce from 'immer'
 import {
   Bank,
   CreditCard,
@@ -8,7 +9,7 @@ import {
   Plus,
   Trash,
 } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../contexts/CartContext'
 import {
   Actions,
@@ -34,7 +35,22 @@ import {
 } from './styles'
 
 export function Payment() {
-  const { coffees, cart, totalItems } = useContext(CartContext)
+  const [coffeesInCart, setCoffeesInCart] = useState([])
+
+  const { coffees, cart, modifyQuantityCoffeeToCart, removeCoffeeToCart } =
+    useContext(CartContext)
+
+  function handleRemoveQuantity(id: string, quantity: number) {
+    modifyQuantityCoffeeToCart(id, quantity - 1)
+  }
+
+  function handleAddQuantity(id: string, quantity: number) {
+    modifyQuantityCoffeeToCart(id, quantity + 1)
+  }
+
+  function handleRemoveCoffeeToCart(id: string) {
+    removeCoffeeToCart(id)
+  }
 
   return (
     <PaymentContainer>
@@ -112,15 +128,28 @@ export function Payment() {
                       <p>{coffee.name}</p>
                       <Actions>
                         <Counter>
-                          <button>
+                          <button
+                            onClick={() =>
+                              handleRemoveQuantity(
+                                cartItem.id,
+                                cartItem.quantity,
+                              )
+                            }
+                          >
                             <Minus size={14} weight="bold" />
                           </button>
                           <span>{cartItem.quantity}</span>
-                          <button>
+                          <button
+                            onClick={() =>
+                              handleAddQuantity(cartItem.id, cartItem.quantity)
+                            }
+                          >
                             <Plus size={16} weight="bold" />
                           </button>
                         </Counter>
-                        <TrashButton>
+                        <TrashButton
+                          onClick={() => handleRemoveCoffeeToCart(cartItem.id)}
+                        >
                           <Trash size={16} weight="bold" />
                           REMOVER
                         </TrashButton>
@@ -139,7 +168,7 @@ export function Payment() {
             <ItemsCart>
               <Price>
                 <p>Total de itens</p>
-                <p>R$ {totalItems}</p>
+                <p>R$ 9.90</p>
               </Price>
               <Price>
                 <p>Entrega</p>
