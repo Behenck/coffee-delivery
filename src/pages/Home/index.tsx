@@ -12,7 +12,7 @@ import {
   Content,
 } from './styles'
 
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 
 import CoffeImage from '../../assets/Coffee.png'
 import { CoffeeCard } from './components/CoffeeCard'

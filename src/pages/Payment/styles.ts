@@ -140,17 +140,19 @@ export const CardsPayments = styled.div`
   gap: 0.75rem;
 `
 
-export const CardsPaymentsButton = styled.button`
+export const CardPaymentsLabel = styled.label`
   display: flex;
   align-items: center;
   justify-content: start;
   width: 100%;
-  border: 0;
-  background: ${(props) => props.theme['gray-400']};
   padding: 1rem;
+  background: ${(props) => props.theme['gray-400']};
+  border: 1px solid ${(props) => props.theme['gray-400']};
   color: ${(props) => props.theme['gray-700']};
   gap: 0.75rem;
   font-size: 0.75rem;
+  cursor: pointer;
+  border-radius: 6px;
   transition: filter 0.2s;
 
   &:hover {
@@ -159,6 +161,15 @@ export const CardsPaymentsButton = styled.button`
 
   svg {
     color: ${(props) => props.theme['purple-500']};
+  }
+`
+
+export const InputRadioPayments = styled.input`
+  display: none;
+
+  &:checked + ${CardPaymentsLabel} {
+    border: 1px solid ${(props) => props.theme['purple-700']};
+    background: ${(props) => props.theme['purple-100']};
   }
 `
 

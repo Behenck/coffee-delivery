@@ -13,7 +13,7 @@ import {
 import { Cart, cartReducer } from '../reducers/cart/reducer'
 import { api } from '../utils/api'
 
-interface Coffee {
+export interface Coffee {
   id: string
   name: string
   image: string
@@ -21,7 +21,7 @@ interface Coffee {
     name: string
   }[]
   description: string
-  price: number
+  price: string
 }
 
 interface CoffeesContextType {
@@ -71,6 +71,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   function removeCoffeeToCart(id: string) {
     dispatch(removeCoffeeToCartAction(id))
   }
+
+  function totalItems() {}
 
   return (
     <CartContext.Provider

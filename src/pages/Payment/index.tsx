@@ -15,7 +15,7 @@ import {
   Actions,
   Address,
   CardsPayments,
-  CardsPaymentsButton,
+  CardPaymentsLabel,
   Cart,
   CartCoffees,
   CompleteOrder,
@@ -32,6 +32,7 @@ import {
   Product,
   Total,
   TrashButton,
+  InputRadioPayments,
 } from './styles'
 
 export function Payment() {
@@ -97,18 +98,23 @@ export function Payment() {
           </header>
 
           <CardsPayments>
-            <CardsPaymentsButton>
+            <InputRadioPayments type="radio" id="credit" name="cardPayments" />
+            <CardPaymentsLabel htmlFor="credit">
               <CreditCard size={16} />
               CARTÃO DE CRÉDITO
-            </CardsPaymentsButton>
-            <CardsPaymentsButton>
+            </CardPaymentsLabel>
+
+            <InputRadioPayments type="radio" id="debit" name="cardPayments" />
+            <CardPaymentsLabel htmlFor="debit">
               <Bank size={16} />
               CARTÃO DE DÉBITO
-            </CardsPaymentsButton>
-            <CardsPaymentsButton>
+            </CardPaymentsLabel>
+
+            <InputRadioPayments type="radio" id="money" name="cardPayments" />
+            <CardPaymentsLabel htmlFor="money">
               <Money size={16} />
               DINHEIRO
-            </CardsPaymentsButton>
+            </CardPaymentsLabel>
           </CardsPayments>
         </PaymentContent>
       </CompleteOrder>
@@ -156,7 +162,7 @@ export function Payment() {
                       </Actions>
                     </Details>
                   </Info>
-                  <span>R$ {coffee.price}0</span>
+                  <span>R$ {coffee.price}</span>
                 </Product>
               )
             } else {

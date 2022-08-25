@@ -19,7 +19,7 @@ interface CoffeeCardProps {
     name: string
   }[]
   description: string
-  price: number
+  price: string
 }
 
 export function CoffeeCard({
@@ -32,7 +32,7 @@ export function CoffeeCard({
 }: CoffeeCardProps) {
   const [quantity, setQuantity] = useState(1)
 
-  const { cart, addToCart } = useContext(CartContext)
+  const { addToCart } = useContext(CartContext)
 
   function handleAddToCart() {
     addToCart(id, quantity)
@@ -61,7 +61,7 @@ export function CoffeeCard({
 
       <Buy>
         <div>
-          R$ <span>{price}0</span>
+          R$ <span>{price}</span>
         </div>
 
         <Actions>
