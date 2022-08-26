@@ -1,4 +1,3 @@
-import produce from 'immer'
 import {
   Bank,
   CreditCard,
@@ -11,6 +10,7 @@ import {
 } from 'phosphor-react'
 import { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../contexts/CartContext'
+import { formatAmount } from '../../utils/formatAmount'
 import {
   Actions,
   Address,
@@ -36,10 +36,15 @@ import {
 } from './styles'
 
 export function Payment() {
-  const [coffeesInCart, setCoffeesInCart] = useState([])
-
-  const { coffees, cart, modifyQuantityCoffeeToCart, removeCoffeeToCart } =
-    useContext(CartContext)
+  const {
+    coffees,
+    cart,
+    modifyQuantityCoffeeToCart,
+    removeCoffeeToCart,
+    totalItems,
+    deliveryValue,
+    total,
+  } = useContext(CartContext)
 
   function handleRemoveQuantity(id: string, quantity: number) {
     modifyQuantityCoffeeToCart(id, quantity - 1)
@@ -52,6 +57,10 @@ export function Payment() {
   function handleRemoveCoffeeToCart(id: string) {
     removeCoffeeToCart(id)
   }
+
+  const totalItemsFormatted = formatAmount(totalItems)
+  const deliveryValueFormatted = formatAmount(deliveryValue)
+  const totalFormatted = formatAmount(total)
 
   return (
     <PaymentContainer>
@@ -121,73 +130,86 @@ export function Payment() {
 
       <CartCoffees>
         <h1>Cafés selecionados</h1>
-        <Cart>
-          {coffees.map((coffee) => {
-            const cartItem = cart.find((cartItem) => cartItem.id === coffee.id)
-
-            if (cartItem) {
-              return (
-                <Product key={coffee.id}>
-                  <Info>
-                    <img src={coffee.image} alt="" />
-                    <Details>
-                      <p>{coffee.name}</p>
-                      <Actions>
-                        <Counter>
-                          <button
-                            onClick={() =>
-                              handleRemoveQuantity(
-                                cartItem.id,
-                                cartItem.quantity,
-                              )
-                            }
-                          >
-                            <Minus size={14} weight="bold" />
-                          </button>
-                          <span>{cartItem.quantity}</span>
-                          <button
-                            onClick={() =>
-                              handleAddQuantity(cartItem.id, cartItem.quantity)
-                            }
-                          >
-                            <Plus size={16} weight="bold" />
-                          </button>
-                        </Counter>
-                        <TrashButton
-                          onClick={() => handleRemoveCoffeeToCart(cartItem.id)}
-                        >
-                          <Trash size={16} weight="bold" />
-                          REMOVER
-                        </TrashButton>
-                      </Actions>
-                    </Details>
-                  </Info>
-                  <span>R$ {coffee.price}</span>
-                </Product>
+        {totalItems !== 0 ? (
+          <Cart>
+            {coffees.map((coffee) => {
+              const cartItem = cart.find(
+                (cartItem) => cartItem.id === coffee.id,
               )
-            } else {
-              return <></>
-            }
-          })}
 
-          <div>
-            <ItemsCart>
-              <Price>
-                <p>Total de itens</p>
-                <p>R$ 9.90</p>
-              </Price>
-              <Price>
-                <p>Entrega</p>
-                <p>R$ 3,50</p>
-              </Price>
-              <Total>
-                <p>Total</p>
-                <p>R$ 33,20</p>
-              </Total>
-            </ItemsCart>
-            <ConfirmDeliveryButton>CONFIRMAR PEDIDO</ConfirmDeliveryButton>
-          </div>
-        </Cart>
+              if (cartItem) {
+                return (
+                  <Product key={coffee.id}>
+                    <Info>
+                      <img src={coffee.image} alt="" />
+                      <Details>
+                        <p>{coffee.name}</p>
+                        <Actions>
+                          <Counter>
+                            <button
+                              onClick={() =>
+                                handleRemoveQuantity(
+                                  cartItem.id,
+                                  cartItem.quantity,
+                                )
+                              }
+                            >
+                              <Minus size={14} weight="bold" />
+                            </button>
+                            <span>{cartItem.quantity}</span>
+                            <button
+                              onClick={() =>
+                                handleAddQuantity(
+                                  cartItem.id,
+                                  cartItem.quantity,
+                                )
+                              }
+                            >
+                              <Plus size={16} weight="bold" />
+                            </button>
+                          </Counter>
+                          <TrashButton
+                            onClick={() =>
+                              handleRemoveCoffeeToCart(cartItem.id)
+                            }
+                          >
+                            <Trash size={16} weight="bold" />
+                            REMOVER
+                          </TrashButton>
+                        </Actions>
+                      </Details>
+                    </Info>
+                    <span>{formatAmount(coffee.price)}</span>
+                  </Product>
+                )
+              } else {
+                return <></>
+              }
+            })}
+
+            <div>
+              <ItemsCart>
+                <Price>
+                  <p>Total de itens</p>
+                  <p>{totalItemsFormatted}</p>
+                </Price>
+                <Price>
+                  <p>Entrega</p>
+                  <p>{deliveryValueFormatted}</p>
+                </Price>
+                <Total>
+                  <p>Total</p>
+                  <p>{totalFormatted}</p>
+                </Total>
+              </ItemsCart>
+              <ConfirmDeliveryButton>CONFIRMAR PEDIDO</ConfirmDeliveryButton>
+            </div>
+          </Cart>
+        ) : (
+          <Cart>
+            <h1>Seu carrinho está vazio!</h1>
+          </Cart>
+        )}
       </CartCoffees>
     </PaymentContainer>
   )

@@ -7,6 +7,7 @@ import {
 } from 'react'
 import {
   addNewCoffeeToCartAction,
+  calculateItemsToCart,
   modifyQuantityCoffeeToCartAction,
   removeCoffeeToCartAction,
 } from '../reducers/cart/actions'
@@ -21,15 +22,18 @@ export interface Coffee {
     name: string
   }[]
   description: string
-  price: string
+  price: number
 }
 
 interface CoffeesContextType {
   cart: Cart[]
   coffees: Coffee[]
-  addToCart: (id: string, quantity: number) => void
+  addToCart: (id: string, quantity: number, price: number) => void
   modifyQuantityCoffeeToCart: (id: string, quantity: number) => void
   removeCoffeeToCart: (id: string) => void
+  totalItems: number
+  deliveryValue: number
+  total: number
 }
 
 export const CartContext = createContext({} as CoffeesContextType)
@@ -41,9 +45,13 @@ interface CartContextProviderProps {
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cartState, dispatch] = useReducer(cartReducer, {
     cart: [],
+    totalItems: 0,
+    deliveryValue: 6, // define o valor da entrega
+    total: 0,
   })
 
-  const { cart } = cartState
+  const { cart, totalItems, deliveryValue } = cartState
+  const total = totalItems + deliveryValue
 
   const [coffees, setCoffees] = useState<Coffee[]>([])
 
@@ -55,24 +63,27 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     listCoffees()
   }, [])
 
-  function addToCart(id: string, quantity: number) {
+  function addToCart(id: string, quantity: number, price: number) {
     const newCoffeeToCart: Cart = {
       id,
       quantity,
+      price,
+      amount: price * quantity,
     }
 
     dispatch(addNewCoffeeToCartAction(newCoffeeToCart))
+    dispatch(calculateItemsToCart())
   }
 
   function modifyQuantityCoffeeToCart(id: string, quantity: number) {
     dispatch(modifyQuantityCoffeeToCartAction(id, quantity))
+    dispatch(calculateItemsToCart())
   }
 
   function removeCoffeeToCart(id: string) {
     dispatch(removeCoffeeToCartAction(id))
+    dispatch(calculateItemsToCart())
   }
-
-  function totalItems() {}
 
   return (
     <CartContext.Provider
@@ -82,6 +93,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         addToCart,
         modifyQuantityCoffeeToCart,
         removeCoffeeToCart,
+        totalItems,
+        deliveryValue,
+        total,
       }}
     >
       {children}

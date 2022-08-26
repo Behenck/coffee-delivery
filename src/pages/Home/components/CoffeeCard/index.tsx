@@ -1,6 +1,7 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { useContext, useState } from 'react'
 import { CartContext } from '../../../../contexts/CartContext'
+import { formatAmount } from '../../../../utils/formatAmount'
 
 import {
   Actions,
@@ -19,7 +20,7 @@ interface CoffeeCardProps {
     name: string
   }[]
   description: string
-  price: string
+  price: number
 }
 
 export function CoffeeCard({
@@ -35,7 +36,7 @@ export function CoffeeCard({
   const { addToCart } = useContext(CartContext)
 
   function handleAddToCart() {
-    addToCart(id, quantity)
+    addToCart(id, quantity, price)
 
     setQuantity(1)
   }
@@ -47,6 +48,8 @@ export function CoffeeCard({
   function handleAddQuantity() {
     setQuantity((state) => state + 1)
   }
+
+  const priceFormatted = formatAmount(price).slice(3)
 
   return (
     <CoffeeCardContainer>
@@ -61,7 +64,7 @@ export function CoffeeCard({
 
       <Buy>
         <div>
-          R$ <span>{price}</span>
+          R$ <span>{priceFormatted}</span>
         </div>
 
         <Actions>

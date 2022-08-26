@@ -6,10 +6,15 @@ import { CartContext } from '../../contexts/CartContext'
 export interface Cart {
   id: string
   quantity: number
+  price: number
+  amount: number
 }
 
 interface CartState {
   cart: Cart[]
+  totalItems: number
+  deliveryValue: number
+  total: number
 }
 
 export function cartReducer(state: CartState, action: any) {
@@ -47,6 +52,19 @@ export function cartReducer(state: CartState, action: any) {
     }
 
     case ActionTypes.CALCULATE_ITEMS_TO_CART:
+      return produce(state, (draft) => {
+        const number = draft.cart.map((cartItem) => {
+          let sumAmount = 0
+          sumAmount = sumAmount + cartItem.amount
+          return sumAmount
+        })
+
+        if (number) {
+          draft.totalItems = number.reduce((soma, i) => {
+            return soma + i
+          })
+        }
+      })
 
     default:
       return state
