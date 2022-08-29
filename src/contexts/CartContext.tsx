@@ -43,16 +43,6 @@ interface CartContextProviderProps {
 }
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cartState, dispatch] = useReducer(cartReducer, {
-    cart: [],
-    totalItems: 0,
-    deliveryValue: 6, // define o valor da entrega
-    total: 0,
-  })
-
-  const { cart, totalItems, deliveryValue } = cartState
-  const total = totalItems + deliveryValue
-
   const [coffees, setCoffees] = useState<Coffee[]>([])
 
   useEffect(() => {
@@ -62,6 +52,16 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     }
     listCoffees()
   }, [])
+
+  const [cartState, dispatch] = useReducer(cartReducer, {
+    cart: [],
+    totalItems: 0,
+    deliveryValue: 6, // define o valor da entrega
+    total: 0,
+  })
+
+  const { cart, totalItems, deliveryValue } = cartState
+  const total = totalItems + deliveryValue
 
   function addToCart(id: string, quantity: number, price: number) {
     const newCoffeeToCart: Cart = {

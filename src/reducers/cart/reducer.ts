@@ -21,7 +21,18 @@ export function cartReducer(state: CartState, action: any) {
   switch (action.type) {
     case ActionTypes.ADD_NEW_COFFEE_TO_CART:
       return produce(state, (draft) => {
-        draft.cart.push(action.payload.NewCoffeeToCart)
+        const alreadyExistsToCart = state.cart.findIndex((cartItem) => {
+          return cartItem.id === action.payload.NewCoffeeToCart.id
+        })
+        console.log(alreadyExistsToCart)
+
+        if (alreadyExistsToCart < 0) {
+          draft.cart.push(action.payload.NewCoffeeToCart)
+        } else {
+          draft.cart[alreadyExistsToCart].quantity =
+            draft.cart[alreadyExistsToCart].quantity +
+            action.payload.NewCoffeeToCart.quantity
+        }
       })
 
     case ActionTypes.MODIFY_QUANTITY_COFFEE_TO_CART: {
@@ -54,6 +65,8 @@ export function cartReducer(state: CartState, action: any) {
     case ActionTypes.CALCULATE_ITEMS_TO_CART:
       return produce(state, (draft) => {
         const number = draft.cart.map((cartItem) => {
+          cartItem.amount = cartItem.price * cartItem.quantity
+
           let sumAmount = 0
           sumAmount = sumAmount + cartItem.amount
           return sumAmount
