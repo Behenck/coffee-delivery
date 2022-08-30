@@ -37,7 +37,6 @@ import {
 
 export function Payment() {
   const {
-    coffees,
     cart,
     modifyQuantityCoffeeToCart,
     removeCoffeeToCart,
@@ -132,59 +131,47 @@ export function Payment() {
         <h1>Cafés selecionados</h1>
         {totalItems !== 0 ? (
           <Cart>
-            {coffees.map((coffee) => {
-              const cartItem = cart.find(
-                (cartItem) => cartItem.id === coffee.id,
-              )
-
-              if (cartItem) {
-                return (
-                  <Product key={coffee.id}>
-                    <Info>
-                      <img src={coffee.image} alt="" />
-                      <Details>
-                        <p>{coffee.name}</p>
-                        <Actions>
-                          <Counter>
-                            <button
-                              onClick={() =>
-                                handleRemoveQuantity(
-                                  cartItem.id,
-                                  cartItem.quantity,
-                                )
-                              }
-                            >
-                              <Minus size={14} weight="bold" />
-                            </button>
-                            <span>{cartItem.quantity}</span>
-                            <button
-                              onClick={() =>
-                                handleAddQuantity(
-                                  cartItem.id,
-                                  cartItem.quantity,
-                                )
-                              }
-                            >
-                              <Plus size={16} weight="bold" />
-                            </button>
-                          </Counter>
-                          <TrashButton
+            {cart.map((cartItem) => {
+              console.log(cartItem)
+              return (
+                <Product key={cartItem.id}>
+                  <Info>
+                    <img src={cartItem.coffee.image} alt="" />
+                    <Details>
+                      <p>{cartItem.coffee.name}</p>
+                      <Actions>
+                        <Counter>
+                          <button
                             onClick={() =>
-                              handleRemoveCoffeeToCart(cartItem.id)
+                              handleRemoveQuantity(
+                                cartItem.id,
+                                cartItem.quantity,
+                              )
                             }
                           >
-                            <Trash size={16} weight="bold" />
-                            REMOVER
-                          </TrashButton>
-                        </Actions>
-                      </Details>
-                    </Info>
-                    <span>{formatAmount(coffee.price)}</span>
-                  </Product>
-                )
-              } else {
-                return <></>
-              }
+                            <Minus size={14} weight="bold" />
+                          </button>
+                          <span>{cartItem.quantity}</span>
+                          <button
+                            onClick={() =>
+                              handleAddQuantity(cartItem.id, cartItem.quantity)
+                            }
+                          >
+                            <Plus size={16} weight="bold" />
+                          </button>
+                        </Counter>
+                        <TrashButton
+                          onClick={() => handleRemoveCoffeeToCart(cartItem.id)}
+                        >
+                          <Trash size={16} weight="bold" />
+                          REMOVER
+                        </TrashButton>
+                      </Actions>
+                    </Details>
+                  </Info>
+                  <span>{formatAmount(cartItem.coffee.price)}</span>
+                </Product>
+              )
             })}
 
             <div>

@@ -6,7 +6,11 @@ import { CartContext } from '../../contexts/CartContext'
 export interface Cart {
   id: string
   quantity: number
-  price: number
+  coffee: {
+    name: string
+    price: number
+    image: string
+  }
   amount: number
 }
 
@@ -24,7 +28,6 @@ export function cartReducer(state: CartState, action: any) {
         const alreadyExistsToCart = state.cart.findIndex((cartItem) => {
           return cartItem.id === action.payload.NewCoffeeToCart.id
         })
-        console.log(alreadyExistsToCart)
 
         if (alreadyExistsToCart < 0) {
           draft.cart.push(action.payload.NewCoffeeToCart)
@@ -59,20 +62,22 @@ export function cartReducer(state: CartState, action: any) {
 
       return produce(state, (draft) => {
         draft.cart.splice(coffeeCartIndex, 1)
+        draft.totalItems = 0
+        draft.total = 0
       })
     }
 
     case ActionTypes.CALCULATE_ITEMS_TO_CART:
       return produce(state, (draft) => {
         const number = draft.cart.map((cartItem) => {
-          cartItem.amount = cartItem.price * cartItem.quantity
+          cartItem.amount = cartItem.coffee.price * cartItem.quantity
 
           let sumAmount = 0
           sumAmount = sumAmount + cartItem.amount
+          console.log(sumAmount)
           return sumAmount
         })
-
-        if (number) {
+        if (number.length > 0) {
           draft.totalItems = number.reduce((soma, i) => {
             return soma + i
           })

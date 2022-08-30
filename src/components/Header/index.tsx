@@ -11,6 +11,8 @@ export function Header() {
 
   const quantityCart = cart ? cart.length : 0
 
+  const location = navigator.geolocation.getCurrentPosition
+
   return (
     <HeaderContainer>
       <NavLink to="/" title="Carrinho">
@@ -18,7 +20,13 @@ export function Header() {
       </NavLink>
 
       <div>
-        <MapButton>
+        <MapButton
+          onClick={() => {
+            navigator.geolocation.getCurrentPosition((location) => {
+              console.log(location)
+            })
+          }}
+        >
           <MapPin size={24} weight="fill" />
           Uruguaiana, RS
         </MapButton>

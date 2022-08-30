@@ -12,14 +12,34 @@ import {
   Content,
 } from './styles'
 
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
-import CoffeImage from '../../assets/Coffee.png'
+import CoffeeImage from '../../assets/Coffee.png'
 import { CoffeeCard } from './components/CoffeeCard'
 import { CartContext } from '../../contexts/CartContext'
+import { api } from '../../utils/api'
+
+export interface Coffee {
+  id: string
+  name: string
+  image: string
+  tags: {
+    name: string
+  }[]
+  description: string
+  price: number
+}
 
 export function Home() {
-  const { coffees } = useContext(CartContext)
+  const [coffees, setCoffees] = useState<Coffee[]>([])
+
+  useEffect(() => {
+    const listCoffees = async () => {
+      const response = await api.get<Coffee[]>('/listCoffees.json')
+      setCoffees(response.data)
+    }
+    listCoffees()
+  }, [])
 
   return (
     <>
@@ -62,7 +82,7 @@ export function Home() {
             </div>
           </DescriptionDelivery>
         </div>
-        <img src={CoffeImage} alt="Ilustração de um café" />
+        <img src={CoffeeImage} alt="Ilustração de um café" />
       </Container>
 
       <CoffeesContent>

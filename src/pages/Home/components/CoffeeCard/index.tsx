@@ -36,7 +36,7 @@ export function CoffeeCard({
   const { addToCart } = useContext(CartContext)
 
   function handleAddToCart() {
-    addToCart(id, quantity, price)
+    addToCart(id, quantity, price, name, image)
 
     setQuantity(1)
   }
