@@ -14,6 +14,19 @@ import {
 import { Cart, cartReducer } from '../reducers/cart/reducer'
 import { api } from '../utils/api'
 
+interface ConfirmPurchaseToCartData {
+  address: {
+    zipCode: string
+    road: string
+    number: number
+    complement: string
+    district: string
+    city: string
+    uf: string
+  }
+  payment: string
+}
+
 interface CoffeesContextType {
   cart: Cart[]
   totalItems: number
@@ -28,12 +41,20 @@ interface CoffeesContextType {
   ) => void
   modifyQuantityCoffeeToCart: (id: string, quantity: number) => void
   removeCoffeeToCart: (id: string) => void
+  confirmPurchaseToCart: (data: ConfirmPurchaseToCartData) => void
 }
 
 export const CartContext = createContext({} as CoffeesContextType)
 
 interface CartContextProviderProps {
   children: ReactNode
+}
+
+interface Delivery {
+  address: ConfirmPurchaseToCartData
+  payment: string
+  cart: Cart[]
+  amount: number
 }
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
@@ -56,6 +77,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   )
 
   const { cart, totalItems, deliveryValue } = cartState
+
   const total = totalItems + deliveryValue
 
   useEffect(() => {
@@ -96,6 +118,17 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     dispatch(calculateItemsToCart())
   }
 
+  function confirmPurchaseToCart(data: ConfirmPurchaseToCartData) {
+    const deliveryConfirmation: Delivery = {
+      address: data,
+      payment: data.payment,
+      cart,
+      amount: total,
+    }
+
+    console.log(deliveryConfirmation)
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -106,6 +139,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         totalItems,
         deliveryValue,
         total,
+        confirmPurchaseToCart,
       }}
     >
       {children}

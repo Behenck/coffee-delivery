@@ -9,6 +9,10 @@ import {
   Trash,
 } from 'phosphor-react'
 import { useContext, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+
 import { CartContext } from '../../contexts/CartContext'
 import { formatAmount } from '../../utils/formatAmount'
 import {
@@ -35,15 +39,52 @@ import {
   InputRadioPayments,
 } from './styles'
 
+const newCartFormValidationScheme = zod.object({
+  zipCode: zod.string().min(9, 'CEP Incorreto').max(9, 'CEP Incorreto'),
+  road: zod.string().min(5),
+  number: zod.number(),
+  complement: zod.string(),
+  district: zod.string().min(5),
+  city: zod.string().min(3),
+  uf: zod.string().min(2).max(2),
+})
+
+type NewCartFormData = zod.infer<typeof newCartFormValidationScheme>
+
 export function Payment() {
   const {
     cart,
     modifyQuantityCoffeeToCart,
     removeCoffeeToCart,
+    confirmPurchaseToCart,
     totalItems,
     deliveryValue,
     total,
   } = useContext(CartContext)
+
+  const newCartForm = useForm<NewCartFormData>({
+    resolver: zodResolver(newCartFormValidationScheme),
+    defaultValues: {
+      zipCode: '',
+      road: '',
+      number: 0,
+      complement: '',
+      district: '',
+      city: '',
+      uf: '',
+    },
+  })
+
+  const { reset, watch, handleSubmit, register, formState: error } = newCartForm
+
+  function handleConfirmPurchaseToCart(data: NewCartFormData) {
+    console.log(data)
+    confirmPurchaseToCart({
+      address: data,
+      payment: 'debit',
+    })
+    // reset()
+  }
 
   function handleRemoveQuantity(id: string, quantity: number) {
     modifyQuantityCoffeeToCart(id, quantity - 1)
@@ -75,21 +116,59 @@ export function Payment() {
             </div>
           </header>
 
-          <FormAddress id="addressForm">
+          <FormAddress
+            id="addressForm"
+            onSubmit={handleSubmit(handleConfirmPurchaseToCart)}
+          >
             <div>
-              <FormInput type="text" placeholder="CEP" inputSize="33" />
+              <FormInput
+                type="text"
+                placeholder="CEP"
+                inputSize="33"
+                {...register('zipCode')}
+              />
             </div>
             <div>
-              <FormInput type="text" placeholder="Rua" inputSize="100" />
+              <FormInput
+                type="text"
+                placeholder="Rua"
+                inputSize="100"
+                {...register('road')}
+              />
             </div>
             <div>
-              <FormInput type="text" placeholder="Número" inputSize="33" />
-              <FormInput type="text" placeholder="Complemento" inputSize="66" />
+              <FormInput
+                type="number"
+                placeholder="Número"
+                inputSize="33"
+                {...register('number')}
+              />
+              <FormInput
+                type="text"
+                placeholder="Complemento"
+                inputSize="66"
+                {...register('complement')}
+              />
             </div>
             <div>
-              <FormInput type="text" placeholder="Bairro" inputSize="33" />
-              <FormInput type="text" placeholder="Cidade" inputSize="50" />
-              <FormInput type="text" placeholder="UF" inputSize="13" />
+              <FormInput
+                type="text"
+                placeholder="Bairro"
+                inputSize="33"
+                {...register('district')}
+              />
+              <FormInput
+                type="text"
+                placeholder="Cidade"
+                inputSize="50"
+                {...register('city')}
+              />
+              <FormInput
+                type="text"
+                placeholder="UF"
+                inputSize="13"
+                {...register('uf')}
+              />
             </div>
           </FormAddress>
         </Address>
