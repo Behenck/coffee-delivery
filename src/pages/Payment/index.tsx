@@ -75,7 +75,7 @@ export function Payment() {
             </div>
           </header>
 
-          <FormAddress>
+          <FormAddress id="addressForm">
             <div>
               <FormInput type="text" placeholder="CEP" inputSize="33" />
             </div>
@@ -132,7 +132,6 @@ export function Payment() {
         {totalItems !== 0 ? (
           <Cart>
             {cart.map((cartItem) => {
-              console.log(cartItem)
               return (
                 <Product key={cartItem.id}>
                   <Info>
@@ -189,7 +188,9 @@ export function Payment() {
                   <p>{totalFormatted}</p>
                 </Total>
               </ItemsCart>
-              <ConfirmDeliveryButton>CONFIRMAR PEDIDO</ConfirmDeliveryButton>
+              <ConfirmDeliveryButton form="addressForm">
+                CONFIRMAR PEDIDO
+              </ConfirmDeliveryButton>
             </div>
           </Cart>
         ) : (
